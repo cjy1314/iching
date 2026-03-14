@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易经占卜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8dfd0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+            letter-spacing: 4px;
+        }
+
+        .header p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .guide {
+            padding: 20px;
+            background: #faf8f5;
+            border-bottom: 2px solid #e0d5c5;
+        }
+
+        .guide h2 {
+            color: #8B4513;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .guide-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .guide-content .principle-box {
+            background: linear-gradient(135deg, #FFF8F0 0%, #F5E6D3 100%);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #C68642;
+            box-shadow: 0 3px 10px rgba(139, 69, 19, 0.15);
+        }
+
+        .principle-highlight {
+            text-align: center;
+            font-size: 1.15em;
+            color: #6D3A1F;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #C68642;
+        }
+
+        .principle-icon {
+            color: #8B4513;
+            margin: 0 8px;
+            font-size: 1em;
+        }
+
+        .key-sentence {
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            padding: 14px 20px;
+            margin-top: 4px;
+            background: linear-gradient(135deg, #6D3A1F 0%, #8B4513 50%, #6D3A1F 100%);
+            color: #FFF3E0;
+            border-radius: 8px;
+            letter-spacing: 2px;
+            box-shadow: 0 3px 12px rgba(109, 58, 31, 0.35);
+            border: 1px solid rgba(255, 220, 180, 0.4);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, #FDF6EE 0%, #F0E0C8 100%);
+            border-radius: 10px;
+            padding: 16px 20px;
+            border: 2px solid #C68642;
+            box-shadow: 0 3px 10px rgba(139, 69, 19, 0.12);
+        }
+
+        .tips-title {
+            text-align: center;
+            font-size: 1.2em;
+            color: #6D3A1F;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #C68642;
+            letter-spacing: 2px;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list > li {
+            display: flex;
+            gap: 12px;
+            margin: 10px 0;
+            align-items: flex-start;
+        }
+
+        .tip-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #C68642, #8B4513);
+            color: #fff;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.95em;
+            box-shadow: 0 2px 6px rgba(139, 69, 19, 0.35);
+        }
+
+        .tip-content {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .tip-content strong {
+            color: #5D2E0C;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .tip-content ul {
+            margin: 6px 0 0 0;
+            padding-left: 18px;
+        }
+
+        .tip-content ul li {
+            margin: 5px 0;
+            color: #333;
+            line-height: 1.5;
+            list-style-type: disc;
+            font-size: 0.95em;
+        }
+
+        .guide-content .tips {
+            margin-top: 20px;
+        }
+
+        .guide-content .tips li {
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+
+        .input-section {
+            padding: 20px 35px;
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-radius: 0 0 12px 12px;
+            border-top: 3px solid #1976D2;
+        }
+
+        .input-section h2 {
+            color: #1565C0;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 4px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .instruction {
+            text-align: center;
+            color: #0D47A1;
+            margin-bottom: 18px;
+            font-size: 1.05em;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border-left: 4px solid #1976D2;
+            font-weight: 500;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.15);
+        }
+
+        .input-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 4px 0;
+        }
+
+        .input-item label {
+            font-size: 1.05em;
+            color: #1565C0;
+            min-width: 130px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .input-item input {
+            flex: 1;
+            padding: 10px 14px;
+            font-size: 1.15em;
+            border: 2px solid #90CAF9;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+            background: #FAFAFA;
+        }
+
+        .input-item input:focus {
+            border-color: #1976D2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+            background: #fff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 38px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+        }
+
+        .btn-random {
+            background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
+            color: #fff;
+        }
+
+        .btn-random:hover {
+            background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        .btn-divine {
+            background: linear-gradient(135deg, #D84315 0%, #BF360C 100%);
+            color: #fff;
+        }
+
+        .btn-divine:hover {
+            background: linear-gradient(135deg, #BF360C 0%, #D84315 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(191, 54, 12, 0.4);
+        }
+
+        .result-section {
+            display: none;
+            padding: 20px;
+            background: #faf8f5;
+            border-top: 2px solid #e0d5c5;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .result-header h2 {
+            color: #8B4513;
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .hexagram-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .hexagram-image {
+            max-width: 500px;
+            border: 4px solid #8B4513;
+            border-radius: 12px;
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .hexagram-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #f5f5f5;
+            color: #999;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .hexagram-info {
+            text-align: center;
+        }
+
+        .hexagram-name {
+            font-size: 1.8em;
+            color: #8B4513;
+            font-weight: bold;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .hexagram-text, .yao-text, .hexagram-translation, .hexagram-explain, .fpr-explain, .yao-translation, .yao-explain {
+            background: #fff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+        }
+
+        .hexagram-text h3, .yao-text h3, .hexagram-translation h3, .hexagram-explain h3, .fpr-explain h3, .yao-translation h3, .yao-explain h3 {
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+        }
+
+        .hexagram-text p, .yao-text p, .hexagram-translation p, .hexagram-explain p, .yao-translation p, .yao-explain p {
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #333;
+            text-indent: 2em;
+        }
+
+        .hexagram-translation {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .tuan-text, .tuan-translation, .xiang-text, .xiang-translation {
+            background: #fff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+        }
+
+        .tuan-text h3, .tuan-translation h3, .xiang-text h3, .xiang-translation h3 {
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+        }
+
+        .tuan-text p, .tuan-translation p, .xiang-text p, .xiang-translation p {
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #333;
+            text-indent: 2em;
+        }
+
+        .tuan-text {
+            border-left: 4px solid #673AB7;
+        }
+
+        .tuan-translation {
+            border-left: 4px solid #9575CD;
+        }
+
+        .xiang-text {
+            border-left: 4px solid #00BCD4;
+        }
+
+        .xiang-translation {
+            border-left: 4px solid #4DD0E1;
+        }
+
+        .yao-xiang-text, .yao-xiang-translation {
+            background: #fff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+        }
+
+        .yao-xiang-text h3, .yao-xiang-translation h3 {
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+        }
+
+        .yao-xiang-text p, .yao-xiang-translation p {
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #333;
+            text-indent: 2em;
+        }
+
+        .yao-xiang-text {
+            border-left: 4px solid #795548;
+        }
+
+        .yao-xiang-translation {
+            border-left: 4px solid #A1887F;
+        }
+
+        /* 突出显示解读部分 */
+        .highlight-explain {
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-explain.hexagram-explain {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 5px solid #1976D2;
+        }
+
+        .highlight-explain.yao-explain {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD9 100%);
+            border-left: 5px solid #C2185B;
+        }
+
+        .highlight-explain.fpr-explain {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left: 5px solid #F57C00;
+        }
+
+        .highlight-explain h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 8px;
+        }
+
+        .highlight-explain p {
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #333;
+            text-indent: 2em;
+        }
+
+        .highlight-explain .fpr-item {
+            background: rgba(255,255,255,0.7);
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #F57C00;
+        }
+
+        .highlight-explain .fpr-item strong {
+            color: #E65100;
+            font-size: 1em;
+        }
+
+        /* 分块标题 */
+        .result-part {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        .part-title {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0 0 0;
+            padding: 10px;
+            background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+            letter-spacing: 8px;
+        }
+
+        /* 爻标题：比卦标题更突出 */
+        .part-title--yao {
+            font-size: 1.5em;
+            padding: 13px;
+            background: linear-gradient(135deg, #4A0000 0%, #8B0000 50%, #4A0000 100%);
+            box-shadow: 0 4px 14px rgba(139, 0, 0, 0.4);
+            letter-spacing: 10px;
+        }
+
+        /* 分块内容包裹 */
+        .part-body {
+            padding: 14px 14px 4px;
+            background: #faf8f5;
+            border: 2px solid #d4c4a8;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* 爻分块内容包裹：更突出 */
+        .part-body--yao {
+            border-color: #8B0000;
+            background: #fff8f8;
+            border-width: 2px;
+        }
+
+        .std-question {
+            color: #5D2E0C;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 4px;
+            padding: 1px 6px;
+            border-bottom: 2px solid #8B4513;
+        }
+
+        /* 卦名下方重点提示 */
+        .yao-focus-hint {
+            display: none;
+            margin-top: 14px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 50%, #B71C1C 100%);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(183, 28, 28, 0.45);
+            border: 1.5px solid rgba(255,200,200,0.35);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .yao-focus-hint.visible {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .yao-focus-hint::before {
+            content: "▶ ";
+            font-size: 0.85em;
+            opacity: 0.85;
+        }
+
+        .yao-focus-hint::after {
+            content: " ◀";
+            font-size: 0.85em;
+            opacity: 0.85;
+        }
+
+        .hexagram-explain {
+            border-left: 4px solid #2196F3;
+        }
+
+        .fpr-explain {
+            border-left: 4px solid #FF9800;
+        }
+
+        .fpr-explain h3 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .fpr-item {
+            margin: 12px 0;
+            padding: 10px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+
+        .fpr-item strong {
+            color: #8B4513;
+        }
+
+        .yao-translation {
+            border-left: 4px solid #9C27B0;
+        }
+
+        .yao-explain {
+            border-left: 4px solid #E91E63;
+        }
+
+        .yao-highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .yao-highlight strong {
+            color: #8B4513;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #8B4513, transparent);
+            margin: 18px 0;
+        }
+
+        .note {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .input-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .input-item label {
+                min-width: auto;
+                text-align: left;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>易经占卜</h1>
+            <p>遵循古法，诚心占卜</p>
+        </div>
+
+        <div class="guide">
+            <h2>占卜指南</h2>
+            <div class="guide-content">
+                <div class="principle-box">
+                    <div class="principle-highlight">
+                        <span class="principle-icon">✦</span>
+                        <strong>三大原则：</strong>不诚不占，不义不占，不疑不占
+                        <span class="principle-icon">✦</span>
+                    </div>
+                    <div class="key-sentence">
+                        卦告诉你趋势如何，爻告诉你解决方法
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">占卜提问三要点</div>
+                    <ol class="tips-list">
+                        <li>
+                            <span class="tip-label">01</span>
+                            <div class="tip-content">
+                                <strong>每次占卜，只问一个问题</strong>
+                                <ul>
+                                    <li><span class="std-question">占卜的标准问法：做什么选择，结果怎么样</span></li>
+                                    <li>问题是具体的、三个月内的、与自己相关的</li>
+                                    <li>无有师保，如临父母：人谋鬼课，百姓与能</li>
+                                    <li>心除杂念：默念问题，福至心灵，诚者先知</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="tip-label">02</span>
+                            <div class="tip-content">
+                                <strong>可分角度问，越准确越好</strong>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="tip-label">03</span>
+                            <div class="tip-content">
+                                <strong>结果不好，三个月后再占</strong>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <h2>起卦</h2>
+            <p class="instruction">先想好问题，后随机联想三组三位数</p>
+            
+            <div class="input-group">
+                <div class="input-item">
+                    <label>第一个数字：</label>
+                    <input type="number" id="num1" min="100" max="999" placeholder="请输入三位数">
+                </div>
+                <div class="input-item">
+                    <label>第二个数字：</label>
+                    <input type="number" id="num2" min="100" max="999" placeholder="请输入三位数">
+                </div>
+                <div class="input-item">
+                    <label>第三个数字：</label>
+                    <input type="number" id="num3" min="100" max="999" placeholder="请输入三位数">
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="btn btn-random" onclick="generateNumbers()">随机生成</button>
+                <button class="btn btn-divine" onclick="divine()">起卦解卦</button>
+            </div>
+        </div>
+
+        <div class="result-section" id="result">
+            <div class="result-header">
+                <h2>占卜结果</h2>
+            </div>
+
+            <div class="hexagram-display">
+                <div class="hexagram-image" id="hexagramImage">
+                    <!-- 卦图将在这里显示 -->
+                </div>
+                <div class="hexagram-info">
+                    <div class="hexagram-name" id="hexagramName"></div>
+                    <div class="yao-focus-hint" id="yaoHint"></div>
+                </div>
+            </div>
+
+            <!-- 第一部分：卦的内容 -->
+            <div class="result-part">
+                <div class="part-title">卦</div>
+                <div class="part-body">
+
+                <div class="hexagram-text">
+                    <h3>卦辞</h3>
+                    <p id="hexagramText"></p>
+                </div>
+
+                <div class="hexagram-translation">
+                    <h3>卦辞翻译</h3>
+                    <p id="hexagramTranslation"></p>
+                </div>
+
+                <div class="tuan-text">
+                    <h3>彖传</h3>
+                    <p id="hexagramTuanText"></p>
+                </div>
+
+                <div class="tuan-translation">
+                    <h3>彖传翻译</h3>
+                    <p id="hexagramTuanTranslation"></p>
+                </div>
+
+                <div class="xiang-text">
+                    <h3>象传</h3>
+                    <p id="hexagramXiangText"></p>
+                </div>
+
+                <div class="xiang-translation">
+                    <h3>象传翻译</h3>
+                    <p id="hexagramXiangTranslation"></p>
+                </div>
+
+                <div class="highlight-explain hexagram-explain">
+                    <h3>邵雍卦辞解读</h3>
+                    <p id="hexagramExplainSY"></p>
+                </div>
+
+                <div class="highlight-explain fpr-explain">
+                    <h3>傅佩荣卦象解读</h3>
+                    <div class="fpr-item">
+                        <strong>时运：</strong><span id="fprShiyun"></span>
+                    </div>
+                    <div class="fpr-item">
+                        <strong>财运：</strong><span id="fprCaiyun"></span>
+                    </div>
+                    <div class="fpr-item">
+                        <strong>家宅：</strong><span id="fprJiazhai"></span>
+                    </div>
+                    <div class="fpr-item">
+                        <strong>身体：</strong><span id="fprShenti"></span>
+                    </div>
+                </div>
+
+                </div><!-- end part-body -->
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 第二部分：爻的内容 -->
+            <div class="result-part">
+                <div class="part-title part-title--yao">爻</div>
+                <div class="part-body part-body--yao">
+
+                <div class="yao-text">
+                    <h3>爻辞</h3>
+                    <p id="yaoText"></p>
+                </div>
+
+                <div class="yao-translation">
+                    <h3>爻辞翻译</h3>
+                    <p id="yaoTranslation"></p>
+                </div>
+
+                <div class="yao-xiang-text">
+                    <h3>象传</h3>
+                    <p id="yaoXiangText"></p>
+                </div>
+
+                <div class="yao-xiang-translation">
+                    <h3>象传翻译</h3>
+                    <p id="yaoXiangTranslation"></p>
+                </div>
+
+                <div class="highlight-explain yao-explain">
+                    <h3>邵雍爻辞解读</h3>
+                    <p id="yaoExplainSY"></p>
+                </div>
+
+                <div class="highlight-explain fpr-explain">
+                    <h3>傅佩荣爻象解读</h3>
+                    <div class="fpr-item">
+                        <strong>时运：</strong><span id="yaoFprShiyun"></span>
+                    </div>
+                    <div class="fpr-item">
+                        <strong>财运：</strong><span id="yaoFprCaiyun"></span>
+                    </div>
+                    <div class="fpr-item">
+                        <strong>家宅：</strong><span id="yaoFprJiazhai"></span>
+                    </div>
+                    <div class="fpr-item">
+                        <strong>身体：</strong><span id="yaoFprShenti"></span>
+                    </div>
+                </div>
+
+                </div><!-- end part-body -->
+            </div>
+
+            <p class="note">注：本占卜结果仅供参考，易经之道，贵在变通。</p>
+        </div>
+    </div>
+
+    <script src="js/iching-data.js"></script>
+    <script src="js/hexagramTuanData.js"></script>
+    <script src="js/hexagramXiangData.js"></script>
+    <script src="js/yaoXiangData.js"></script>
+
+    <script>
+        // 页面加载完成后检查数据
+        window.onload = function() {
+            if (typeof window.hexagramImagesData === 'undefined') {
+                alert('数据文件加载失败，请刷新页面重试');
+            }
+        };
+        
+        // 八卦对应表：按用户规则
+        // 数字除以8的余数：1-乾 2-兑 3-离 4-震 5-巽 6-坎 7-艮 0-坤
+        const trigrams = ['坤', '乾', '兑', '离', '震', '巽', '坎', '艮'];
+        // 索引:        0    1    2    3    4    5    6    7
+        
+        // 爻位名称
+        const yaoPositions = ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
+
+        // 随机生成三组三位数
+        function generateNumbers() {
+            const num1 = Math.floor(Math.random() * 900) + 100;
+            const num2 = Math.floor(Math.random() * 900) + 100;
+            const num3 = Math.floor(Math.random() * 900) + 100;
+            
+            document.getElementById('num1').value = num1;
+            document.getElementById('num2').value = num2;
+            document.getElementById('num3').value = num3;
+        }
+
+        // 起卦解卦
+        function divine() {
+            try {
+                const num1 = parseInt(document.getElementById('num1').value);
+                const num2 = parseInt(document.getElementById('num2').value);
+                const num3 = parseInt(document.getElementById('num3').value);
+
+                // 验证输入
+                if (!num1 || !num2 || !num3) {
+                    alert('请输入三个三位数');
+                    return;
+                }
+                if (num1 < 100 || num1 > 999 || num2 < 100 || num2 > 999 || num3 < 100 || num3 > 999) {
+                    alert('请输入有效的三位数（100-999）');
+                    return;
+                }
+
+                // 计算下卦（第一个数除以8的余数）
+                // 余数直接作为索引：0-坤,1-乾,2-兑,3-离,4-震,5-巽,6-坎,7-艮
+                let lowerRemainder = num1 % 8;
+
+                // 计算上卦（第二个数除以8的余数）
+                let upperRemainder = num2 % 8;
+
+                // 计算爻位（第三个数除以6的余数）
+                let yaoPosition = num3 % 6;
+                if (yaoPosition === 0) yaoPosition = 6;
+
+                // 获取八卦名称
+                const lowerTrigram = trigrams[lowerRemainder];
+                const upperTrigram = trigrams[upperRemainder];
+
+                // 上下卦到卦索引的映射表（严格对照数据文件64卦顺序）
+                // 规则：余数 1-乾 2-兑 3-离 4-震 5-巽 6-坎 7-艮 0-坤
+                // 格式: "上卦余数_下卦余数": 数据索引
+                const hexagramIndexMap = {
+                    // 上乾(1)
+                    "1_1":  0,  // 乾为天
+                    "1_2":  9,  // 天泽履
+                    "1_3": 12,  // 天火同人
+                    "1_4": 24,  // 天雷无妄
+                    "1_5": 43,  // 天风姤
+                    "1_6":  5,  // 天水讼
+                    "1_7": 32,  // 天山遁
+                    "1_0": 11,  // 天地否
+                    // 上兑(2)
+                    "2_1": 42,  // 泽天夬
+                    "2_2": 57,  // 兑为泽
+                    "2_3": 48,  // 泽火革
+                    "2_4": 16,  // 泽雷随
+                    "2_5": 27,  // 泽风大过
+                    "2_6": 46,  // 泽水困
+                    "2_7": 30,  // 泽山咸
+                    "2_0": 44,  // 泽地萃
+                    // 上离(3)
+                    "3_1": 13,  // 火天大有
+                    "3_2": 37,  // 火泽睽
+                    "3_3": 29,  // 离为火
+                    "3_4": 20,  // 火雷噬嗑
+                    "3_5": 49,  // 火风鼎
+                    "3_6": 63,  // 火水未济
+                    "3_7": 55,  // 火山旅
+                    "3_0": 34,  // 火地晋
+                    // 上震(4)
+                    "4_1": 33,  // 雷天大壮
+                    "4_2": 53,  // 雷泽归妹
+                    "4_3": 54,  // 雷火丰
+                    "4_4": 50,  // 震为雷
+                    "4_5": 31,  // 雷风恒
+                    "4_6": 39,  // 雷水解
+                    "4_7": 61,  // 雷山小过
+                    "4_0": 15,  // 雷地豫
+                    // 上巽(5)
+                    "5_1":  8,  // 风天小畜
+                    "5_2": 60,  // 风泽中孚
+                    "5_3": 36,  // 风火家人
+                    "5_4": 41,  // 风雷益
+                    "5_5": 56,  // 巽为风
+                    "5_6": 58,  // 风水涣
+                    "5_7": 52,  // 风山渐
+                    "5_0": 19,  // 风地观
+                    // 上坎(6)
+                    "6_1":  4,  // 水天需
+                    "6_2": 59,  // 水泽节
+                    "6_3": 62,  // 水火既济
+                    "6_4":  2,  // 水雷屯
+                    "6_5": 47,  // 水风井
+                    "6_6": 28,  // 坎为水
+                    "6_7": 38,  // 水山蹇
+                    "6_0":  7,  // 水地比
+                    // 上艮(7)
+                    "7_1": 25,  // 山天大畜
+                    "7_2": 40,  // 山泽损
+                    "7_3": 21,  // 山火贲
+                    "7_4": 26,  // 山雷颐
+                    "7_5": 17,  // 山风蛊
+                    "7_6":  3,  // 山水蒙
+                    "7_7": 51,  // 艮为山
+                    "7_0": 22,  // 山地剥
+                    // 上坤(0)
+                    "0_1": 10,  // 地天泰
+                    "0_2": 18,  // 地泽临
+                    "0_3": 35,  // 地火明夷
+                    "0_4": 23,  // 地雷复
+                    "0_5": 45,  // 地风升
+                    "0_6":  6,  // 地水师
+                    "0_7": 14,  // 地山谦
+                    "0_0":  1   // 坤为地
+                };
+
+                // 直接通过映射表获取索引
+                let hexagramIndex = hexagramIndexMap[`${upperRemainder}_${lowerRemainder}`];
+                if (hexagramIndex === undefined) hexagramIndex = 0;
+
+                // 获取卦的信息
+                const hexagramImage = window.hexagramImagesData[hexagramIndex];
+                const hexagramText = window.hexagramTextData[hexagramIndex];
+                const yaoText = window.yaoTextData[hexagramIndex];
+                const hexagramTranslationData = window.hexagramTranslationData ? window.hexagramTranslationData[hexagramIndex] : null;
+
+                // 显示结果
+                const resultSection = document.getElementById('result');
+                resultSection.classList.add('show');
+
+                // 显示卦图
+                const imageContainer = document.getElementById('hexagramImage');
+                if (hexagramImage) {
+                    imageContainer.innerHTML = `<img src="images/${hexagramImage.text}" alt="${hexagramImage.name}">`;
+                }
+
+                // 显示卦名（包含第几卦第几爻）
+                const yaoPositionName = yaoPositions[yaoPosition - 1];
+                // 提取别名：如"雷地豫"→"豫卦"，"雷山小过"→"小过卦"，"乾为天"→"乾卦"
+                let hexagramAlias = '';
+                if (hexagramImage) {
+                    const n = hexagramImage.name;
+                    hexagramAlias = (n.includes('为') ? n.slice(0, 1) : n.slice(2)) + '卦';
+                }
+                document.getElementById('hexagramName').innerHTML = hexagramImage
+                    ? `<div>第${hexagramIndex + 1}卦 ${hexagramImage.name}(${hexagramAlias})</div><div>${yaoPositionName}</div>`
+                    : '';
+
+                // 动态提示语（放在卦名+爻位下方）
+                const hintEl = document.getElementById('yaoHint');
+                if (hexagramImage) {
+                    hintEl.textContent = `您占到${hexagramImage.name}(${hexagramAlias})的${yaoPositionName}，请重点看爻辞`;
+                    hintEl.classList.add('visible');
+                } else {
+                    hintEl.textContent = '';
+                    hintEl.classList.remove('visible');
+                }
+
+                // 显示卦辞
+                document.getElementById('hexagramText').textContent = hexagramText ? hexagramText.text : '';
+
+                // 显示卦辞翻译
+                const hexagramTranslation = window.hexagramTranslationData ? window.hexagramTranslationData[hexagramIndex] : null;
+                document.getElementById('hexagramTranslation').textContent = hexagramTranslation ? hexagramTranslation.text : '';
+
+                // 显示彖传
+                const hexagramTuan = window.hexagramTuanData ? window.hexagramTuanData[hexagramIndex] : null;
+                document.getElementById('hexagramTuanText').textContent = hexagramTuan ? hexagramTuan.text : '';
+                document.getElementById('hexagramTuanTranslation').textContent = hexagramTuan ? hexagramTuan.translation : '';
+
+                // 显示象传（大象传）
+                const hexagramXiang = window.hexagramXiangData ? window.hexagramXiangData[hexagramIndex] : null;
+                document.getElementById('hexagramXiangText').textContent = hexagramXiang ? hexagramXiang.text : '';
+                document.getElementById('hexagramXiangTranslation').textContent = hexagramXiang ? hexagramXiang.translation : '';
+
+                // 显示邵雍卦象解读
+                const hexagramExplainSY = window.hexagramExplainSYData ? window.hexagramExplainSYData[hexagramIndex] : null;
+                document.getElementById('hexagramExplainSY').textContent = hexagramExplainSY ? hexagramExplainSY.text : '';
+
+                // 显示傅佩荣卦象解读
+                const fprShiyun = window.hexagramExplainFPRshiyunData ? window.hexagramExplainFPRshiyunData[hexagramIndex] : null;
+                const fprCaiyun = window.hexagramExplainFPRcaiyunData ? window.hexagramExplainFPRcaiyunData[hexagramIndex] : null;
+                const fprJiazhai = window.hexagramExplainFPRjiazhaiData ? window.hexagramExplainFPRjiazhaiData[hexagramIndex] : null;
+                const fprShenti = window.hexagramExplainFPRshentiData ? window.hexagramExplainFPRshentiData[hexagramIndex] : null;
+                
+                document.getElementById('fprShiyun').textContent = fprShiyun ? fprShiyun.text : '';
+                document.getElementById('fprCaiyun').textContent = fprCaiyun ? fprCaiyun.text : '';
+                document.getElementById('fprJiazhai').textContent = fprJiazhai ? fprJiazhai.text : '';
+                document.getElementById('fprShenti').textContent = fprShenti ? fprShenti.text : '';
+
+                // 显示爻辞和解读
+                if (yaoText && yaoText.yao) {
+                    const yaoIndex = yaoPosition - 1;
+                    const yaoContent = yaoText.yao[yaoIndex];
+                    
+                    // 显示爻辞原文
+                    document.getElementById('yaoText').innerHTML = yaoContent ? yaoContent : '';
+
+                    // 显示爻辞翻译
+                    const yaoTranslation = window.yaoTranslationData ? window.yaoTranslationData[hexagramIndex] : null;
+                    const yaoTranslationContent = yaoTranslation && yaoTranslation.yao ? yaoTranslation.yao[yaoIndex] : '';
+                    document.getElementById('yaoTranslation').textContent = yaoTranslationContent;
+
+                    // 显示爻象传（小象传）
+                    const yaoXiang = window.yaoXiangData ? window.yaoXiangData[hexagramIndex] : null;
+                    const yaoXiangContent = yaoXiang && yaoXiang.yao ? yaoXiang.yao[yaoIndex] : null;
+                    document.getElementById('yaoXiangText').textContent = yaoXiangContent ? yaoXiangContent.text : '';
+                    document.getElementById('yaoXiangTranslation').textContent = yaoXiangContent ? yaoXiangContent.translation : '';
+
+                    // 显示邵雍爻象解读
+                    let yaoExplainSYText = '';
+                    if (window.yaoExplainSYData) {
+                        const yaoSY = window.yaoExplainSYData[hexagramIndex];
+                        if (yaoSY && yaoSY.yao && yaoSY.yao[yaoIndex]) {
+                            yaoExplainSYText = yaoSY.yao[yaoIndex];
+                        }
+                    }
+                    document.getElementById('yaoExplainSY').textContent = yaoExplainSYText;
+
+                    // 显示傅佩荣爻象解读
+                    const yaoFprShiyun = window.yaoExplainFPRshiyunData ? window.yaoExplainFPRshiyunData[hexagramIndex] : null;
+                    const yaoFprCaiyun = window.yaoExplainFPRcaiyunData ? window.yaoExplainFPRcaiyunData[hexagramIndex] : null;
+                    const yaoFprJiazhai = window.yaoExplainFPRjiazhaiData ? window.yaoExplainFPRjiazhaiData[hexagramIndex] : null;
+                    const yaoFprShenti = window.yaoExplainFPRshentiData ? window.yaoExplainFPRshentiData[hexagramIndex] : null;
+                    
+                    document.getElementById('yaoFprShiyun').textContent = yaoFprShiyun && yaoFprShiyun.yao ? yaoFprShiyun.yao[yaoIndex] : '';
+                    document.getElementById('yaoFprCaiyun').textContent = yaoFprCaiyun && yaoFprCaiyun.yao ? yaoFprCaiyun.yao[yaoIndex] : '';
+                    document.getElementById('yaoFprJiazhai').textContent = yaoFprJiazhai && yaoFprJiazhai.yao ? yaoFprJiazhai.yao[yaoIndex] : '';
+                    document.getElementById('yaoFprShenti').textContent = yaoFprShenti && yaoFprShenti.yao ? yaoFprShenti.yao[yaoIndex] : '';
+                }
+
+                // 滚动到结果区域
+                resultSection.scrollIntoView({ behavior: 'smooth' });
+            } catch(e) {
+                alert('起卦出错: ' + e.message);
+            }
+        }
+    </script>
+
+    <div class="footer">
+        <p>开发者：cjy</p>
+    </div>
+</body>
+</html>
